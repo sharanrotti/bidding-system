@@ -4,10 +4,12 @@ import com.cars24.bidding.system.model.Bid;
 import com.cars24.bidding.system.model.Item;
 import com.cars24.bidding.system.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -32,8 +34,8 @@ public class AuctionController {
     }
 
     @GetMapping
-    public List<Item> getAuctionStatus(@RequestParam(name = "status") String status) {
-        return auctionService.getAuctionStatus(status);
+    public Page<Item> getAuctionStatus(@RequestParam(name = "status") String status , @RequestParam Optional<Integer> page) {
+        return auctionService.getAuctionStatus(status, page);
     }
 
     @PostMapping("/{itemCode}/bid")
